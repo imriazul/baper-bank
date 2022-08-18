@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baper Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <h1 class="text-4xl	text-center mb-4">Welcome to your <span class="text-green-900 font-medium">Baper Bank</span></h1>
+    <div class="block  bg-cyan-400 w-9/12 mx-auto p-8 text-center">
+        <h3 class="mb-4 text-3xl">Please Login</h3>
+        <input class="w-9/12  mb-2 px-3" type="email" name="" id="e-mail" placeholder="please enter Your email id">
+        <input class="w-9/12 mb-2  px-3" type="password" name="" id="pass-word" placeholder="please enter Your password"><br>
+        <button id="sub-btn" class="bg-green-600 rounded-lg px-3 py-1 text-white hover:bg-green-700">Submit</button>
+        <p id="warning-text" class="mt-2 text-red-500"></p>
+
+    </div>
+    <script>
+        document.getElementById('sub-btn').addEventListener('click', function(){
+            const emailId = document.getElementById('e-mail').value;
+            const passWord = document.getElementById('pass-word').value;
+            console.log(emailId, passWord);
+            if(emailId == "amarbaperbank@yahoo.com" && passWord == "accessDe"){
+                console.log('Yes your Baper Bank')
+                console.log(emailId, passWord);
+                location.href = "/bank-home.html"
+            }
+            else{
+                console.log('Chinina Tore')
+                const warning = document.getElementById('warning-text');
+                warning.innerText = 'Email ID or Password not valid'
+            }
+        })
+    </script>
+</body>
+</html>
