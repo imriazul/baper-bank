@@ -23,12 +23,11 @@
             const passWord = document.getElementById('pass-word').value;
             console.log(emailId, passWord);
             if(emailId == "amarbaperbank@yahoo.com" && passWord == "accessDe"){
-                console.log('Yes your Baper Bank')
-                console.log(emailId, passWord);
                 location.href = "/bank-home.html"
             }
             else{
-                console.log('Chinina Tore')
+                document.getElementById('e-mail').value = '';
+                document.getElementById('pass-word').value = '';
                 const warning = document.getElementById('warning-text');
                 warning.innerText = 'Email ID or Password not valid'
             }
