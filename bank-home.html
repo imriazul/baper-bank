@@ -15,32 +15,35 @@
         <div class="grid grid-cols-3 gap-4 text-white w-9/12 mx-auto">
             <div class="bg-lime-600 rounded-lg p-5">
                 <h3 class="text-3xl font-semibold mb-2">Deposite</h3>
-                <h2 class="text-5xl font-bold">$ <spain id="old-depo">00</spain></h2>
+                <h2 class="text-5xl font-bold">$ <spain id="old-depo">00</spain>
+                </h2>
             </div>
             <div class="bg-red-400 rounded-lg p-5">
                 <h3 class="text-3xl font-semibold mb-2">Withdrow</h3>
-                <h2 class="text-5xl font-bold">$ 000</h2>
+                <h2 class="text-5xl font-bold">$ <span id="with-text">00</span></h2>
             </div>
             <div class="bg-yellow-500 rounded-lg p-5">
                 <h3 class="text-3xl font-semibold mb-2">Total Balance</h3>
-                <h2 class="text-5xl font-bold">$ <span id="total-balsnce">5530</span></h2>
+                <h2 class="text-5xl font-bold">$ <span id="total-balsnce">5500</span></h2>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-4 mx-auto w-9/12 mt-5">
             <div class="bg-blue-500 rounded-lg p-5">
                 <h3 class="text-3xl font-semibold mb-2 text-white">Plese Deposit</h3>
-                <input id="depo-field" class="w-9/12 mx-auto mb-2 px-5" type="text" name="" placeholder="$ Enter Deposite Amaunt">
+                <input id="depo-field" class="w-9/12 mx-auto mb-2 px-5" type="text" name=""
+                    placeholder="$ Enter Deposite Amaunt">
                 <button id="dep-btn" class="block rounded-lg bg-green-600 px-4 py-2 text-white">Deposit</button>
             </div>
             <div class="bg-purple-500 rounded-lg p-5">
                 <h3 class="text-3xl font-semibold mb-2 text-white">Plese Withdrow</h3>
-                <input class="w-9/12 mx-auto mb-2 px-5" type="text" name="" id="withd-field" placeholder="$ Enter Withdrow Amaunt">
+                <input class="w-9/12 mx-auto mb-2 px-5" type="text" name="" id="withd-field"
+                    placeholder="$ Enter Withdrow Amaunt">
                 <button id="with-btn" class="block rounded-lg bg-red-400 px-4 py-2 text-white">Withdrow</button>
             </div>
         </div>
     </section>
     <script>
-        document.getElementById('dep-btn').addEventListener('click', function(){
+        document.getElementById('dep-btn').addEventListener('click', function () {
 
             // getting new deposite amount 
             const depoField = document.getElementById('depo-field');
@@ -48,23 +51,54 @@
             const depositEmountNumber = parseFloat(depositEmountString)
 
             // getting previous deposite amount 
-            const oldDepositString = document.getElementById('old-depo'); 
+            const oldDepositString = document.getElementById('old-depo');
             const oldDepositAmount = oldDepositString.innerText;
             oldDepositNumber = parseFloat(oldDepositAmount);
-            const totalDeposit = oldDepositNumber + depositEmountNumber;
-            oldDepositString.innerText = totalDeposit;
-            
-            // console.log(totalDeposit, typeof totalDeposit);
 
-            // now add deposite with total balace
+            // gettin total balace
             const totalBalance = document.getElementById('total-balsnce');
             const totalBalanceInNumber = parseFloat(totalBalance.innerHTML);
-            totalBalance.innerHTML = totalBalanceInNumber + depositEmountNumber;
-            console.log(totalBalance.innerHTML);
 
-
+            if (depositEmountNumber > 0) {
+                // calculation and update in website
+                const totalDeposit = oldDepositNumber + depositEmountNumber;
+                oldDepositString.innerText = totalDeposit;
+                totalBalance.innerHTML = totalBalanceInNumber + depositEmountNumber;
+            }
+            else {
+                alert('only Positive Number')
+            }
             depoField.value = "";
-        })
+        });
+
+
+        document.getElementById('with-btn').addEventListener('click', function () {
+
+            // getting input or new withdrow amount 
+            const withField = document.getElementById('withd-field');
+            const withAmount = parseFloat(withField.value);
+
+            // getting old withdrow amount 
+            const withText = document.getElementById('with-text');
+            const oldWithAmount = parseFloat(withText.innerText);
+            // gettin total balace
+            const totalBalance = document.getElementById('total-balsnce');
+            const totalBalanceInNumber = parseFloat(totalBalance.innerHTML);
+
+
+            if (withAmount > 0 && withAmount <= totalBalanceInNumber) {
+                // calculate and update on website 
+                withText.innerText = oldWithAmount + withAmount;
+                totalBalance.innerHTML = totalBalanceInNumber - withAmount;
+            }
+            else{
+                alert('something went wrong')
+            }
+
+            // tester 
+            // console.log(withAmount, typeof withAmount);
+            withField.value = ''
+        });
 
     </script>
 </body>
